@@ -6,7 +6,7 @@ import unittest
 
 from importlib.machinery import SourceFileLoader
 
-smake = SourceFileLoader("smake", "./smake").load_module()
+pysmake = SourceFileLoader("pysmake", "./pysmake").load_module()
 
 
 #
@@ -75,13 +75,13 @@ SELECT * FROM Orders;
 class TestSMake(unittest.TestCase):
 
 	def test_sql_parser(self):
-		statements = smake.parse_sql(_sql_script)
+		statements = pysmake.parse_sql(_sql_script)
 
 		for stmt in statements:
 			print(f"{stmt.line_from}:{stmt.line_to}\n    {stmt.code}")
 
 		for stmt in statements:
-			print(smake.extract_beginning(stmt.code))
+			print(pysmake.extract_beginning(stmt.code))
 
 		self.assertEqual(len(statements), 17, "SQL statements were not parsed correctly.")
 
